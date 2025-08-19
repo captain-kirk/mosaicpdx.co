@@ -1,0 +1,380 @@
+/* Reset and base styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    /* background-color: #BCB4A3; */
+    /* background-color: #fff; */
+}
+
+/* Import Anonymous Pro font */
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
+
+/* Header styles */
+.header-custom {
+    background-color: #FFBB00;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: 1px solid white;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    height: 80px;
+    width: auto;
+}
+
+.nav-section {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: white !important;
+    text-decoration: none;
+    font-family: 'Anonymous Pro', monospace;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white !important;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+/* Background image styles */
+.background-image {
+    background-image: url('/mosaic.png'); /* Use a direct image file URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+/* Alternative: Full page background */
+.full-page-background {
+    background-color: #FFBB00; /* Yellow background color */
+    min-height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Remove custom header/nav styles, Bootstrap handles these */
+
+/* Main content padding */
+main {
+    padding: 2rem 0;
+}
+
+/* Footer styling with Bootstrap override */
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+}
+
+/* Movement button styles */
+.movement-button {
+    margin-top: 1rem;
+    background-color: #0097b2;
+    color: white;
+    font-family: 'Anonymous Pro', monospace;
+    border: 1px solid white;
+    border-radius: 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Email popup modal styles */
+.email-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.email-modal.hidden {
+    display: none;
+}
+
+.email-modal-content {
+    background-color: #FFBB00;
+    border: 2px solid white;
+    border-radius: 0;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    font-family: 'Anonymous Pro', monospace;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.email-modal h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 1.5rem;
+}
+
+.email-modal p {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-family: 'Anonymous Pro', monospace;
+}
+
+.email-modal input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 0;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.email-modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.email-submit-btn, .email-cancel-btn {
+    padding: 10px 20px;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 16px;
+    border-radius: 0;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.email-submit-btn {
+    background-color: #0097b2;
+    color: white;
+}
+
+.email-cancel-btn {
+    background-color: transparent;
+    color: white;
+}
+
+.email-submit-btn:hover, .email-cancel-btn:hover {
+    opacity: 0.8;
+}
+
+.navbar-custom {
+  background-color: #C46E58 !important;
+}
+
+footer.footer-custom {
+  background-color: #C46E58 !important;
+}
+
+.card-header-custom {
+  background-color: #C46E58 !important;
+  color: white !important;
+}
+
+/* Event PDF card styling */
+.event-pdf-card .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* Photo album grid */
+.photo-album {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.photo-album img {
+    border-radius: 5px;
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Password protection form */
+.password-protection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+/* Calendar styling */
+.rbc-calendar {
+    font-family: 'Arial', sans-serif;
+}
+
+.rbc-event {
+    background-color: #B86830 !important;
+}
+
+.rbc-event:focus,
+.rbc-event:hover {
+    background-color: #B86830 !important;
+    border-color: #B86830 !important;
+}
+
+.rbc-today {
+    background-color: #fff5f5;
+}
+
+.rbc-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+.rbc-month-view {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.rbc-date-cell {
+    text-align: center;
+    padding: 5px;
+}
+
+.rbc-off-range-bg {
+    background-color: #f8f9fa;
+}
+
+.calendar-container .rbc-calendar {
+    border: none;
+}
+
+.btn-coral {
+  background-color: coral;
+  color: white;
+  border-color: coral;
+}
+.btn-coral:hover {
+  background-color: #ff7f50cc;
+  color: white;
+  border-color: #ff7f50cc;
+}
+.calendar-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.table-coral {
+  background-color: coral;
+  color: white;
+}
+.event-link {
+  color: coral;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.modal-coral {
+  background-color: coral;
+  color: white;
+}
+
+/* Good */
+.some-class {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .header-custom {
+    padding: 0.5rem 1rem;
+  }
+  
+  .header-logo {
+    height: 60px;
+  }
+  
+  .nav-section {
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem !important;
+  }
+  
+  .email-modal-content {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+  
+  .email-modal h2 {
+    font-size: 1.3rem;
+  }
+  
+  .email-modal p {
+    font-size: 0.9rem;
+  }
+  
+  .movement-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-custom {
+    padding: 0.5rem;
+  }
+  
+  .header-logo {
+    height: 35px;
+  }
+  
+  .nav-section {
+    gap: 0.5rem;
+  }
+  
+  .nav-link {
+    font-size: 0.8rem !important;
+  }
+  
+  .email-modal-content {
+    padding: 1rem;
+    max-width: 98%;
+  }
+}

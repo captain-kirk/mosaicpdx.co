@@ -1,0 +1,53 @@
+# Node.js dependencies
+node_modules/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js build artifacts and local environment
+.next/
+out/
+.env.local
+.env.*.local
+.env
+public/
+
+# Terraform state and configuration
+# These files can contain sensitive information and are specific to a deployment.
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/*.tfvars
+**/crash.log
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+# Terraform plan files
+# Plan files can contain sensitive data and should not be committed.
+**/tfplan
+
+# Packaged Lambda functions
+# These are generated during the build/deploy process.
+**/lambda-packages/
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

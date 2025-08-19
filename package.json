@@ -1,0 +1,31 @@
+{
+  "name": "mosaicpdx",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview": "next build && npx serve out",
+    "deploy": "bash ./deploy.sh"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "website",
+    "family"
+  ],
+  "author": "Mosaic PDX",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.7",
+    "moment": "^2.30.1",
+    "react": "^19.1.1",
+    "react-big-calendar": "^1.19.4",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "next": "^15.4.2"
+  }
+}
