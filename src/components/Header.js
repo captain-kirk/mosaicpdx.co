@@ -16,7 +16,7 @@ export default function Header() {
           <Link href="/events" className="nav-link">
             Events
           </Link>
-          <Link href="/music" className="nav-link">
+          {/* <Link href="/music" className="nav-link">
             Music
           </Link>
           <Link href="/outdoors" className="nav-link">
@@ -24,7 +24,7 @@ export default function Header() {
           </Link>
           <Link href="/gallery" className="nav-link">
             Gallery
-          </Link>
+          </Link> */}
         </nav>
       </div>
     </header>
