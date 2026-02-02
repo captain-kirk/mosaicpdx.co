@@ -164,6 +164,98 @@ resource "aws_api_gateway_method_response" "emails_get_200" {
   }
 }
 
+# API Gateway Resource for event-flyers
+resource "aws_api_gateway_resource" "event_flyers" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  parent_id   = aws_api_gateway_rest_api.main.root_resource_id
+  path_part   = "event-flyers"
+}
+
+# API Gateway Method for GET /event-flyers
+resource "aws_api_gateway_method" "event_flyers_get" {
+  rest_api_id   = aws_api_gateway_rest_api.main.id
+  resource_id   = aws_api_gateway_resource.event_flyers.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+# API Gateway Method for OPTIONS /event-flyers (CORS Preflight)
+resource "aws_api_gateway_method" "event_flyers_options" {
+  rest_api_id   = aws_api_gateway_rest_api.main.id
+  resource_id   = aws_api_gateway_resource.event_flyers.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+# API Gateway Method Response for OPTIONS /event-flyers
+resource "aws_api_gateway_method_response" "event_flyers_options_200" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.event_flyers.id
+  http_method = aws_api_gateway_method.event_flyers_options.http_method
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true,
+    "method.response.header.Access-Control-Allow-Methods" = true,
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+# API Gateway Integration for OPTIONS /event-flyers (CORS Preflight)
+resource "aws_api_gateway_integration" "event_flyers_options" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.event_flyers.id
+  http_method = aws_api_gateway_method.event_flyers_options.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+# API Gateway Integration Response for OPTIONS /event-flyers
+resource "aws_api_gateway_integration_response" "event_flyers_options_200" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.event_flyers.id
+  http_method = aws_api_gateway_method.event_flyers_options.http_method
+  status_code = aws_api_gateway_method_response.event_flyers_options_200.status_code
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
+    "method.response.header.Access-Control-Allow-Origin"  = local.allowed_origins
+  }
+
+  depends_on = [aws_api_gateway_method.event_flyers_options, aws_api_gateway_integration.event_flyers_options]
+}
+
+# API Gateway Integration for event-flyers GET
+resource "aws_api_gateway_integration" "event_flyers_get" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.event_flyers.id
+  http_method = aws_api_gateway_method.event_flyers_get.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.get_event_flyers.invoke_arn
+}
+
+# API Gateway Method Response for event-flyers GET
+resource "aws_api_gateway_method_response" "event_flyers_get_200" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.event_flyers.id
+  http_method = aws_api_gateway_method.event_flyers_get.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = true
+  }
+}
+
 # API Gateway Stage
 resource "aws_api_gateway_stage" "main" {
   deployment_id = aws_api_gateway_deployment.main.id
@@ -188,6 +280,11 @@ resource "aws_api_gateway_deployment" "main" {
       aws_api_gateway_resource.emails.id,
       aws_api_gateway_method.emails_get.id,
       aws_api_gateway_integration.emails_get.id,
+      aws_api_gateway_resource.event_flyers.id,
+      aws_api_gateway_method.event_flyers_get.id,
+      aws_api_gateway_integration.event_flyers_get.id,
+      aws_api_gateway_method.event_flyers_options.id,
+      aws_api_gateway_integration.event_flyers_options.id,
     ]))
   }
 
