@@ -83,3 +83,45 @@ resource "aws_cloudwatch_log_group" "get_emails_logs" {
   retention_in_days = 14
   tags              = local.common_tags
 }
+
+# IAM policy for Lambda to access S3 event flyers
+resource "aws_iam_policy" "lambda_s3_events_policy" {
+  name        = "${var.project_name}-lambda-s3-events-policy-${var.environment}"
+  description = "IAM policy for Lambda to list and read event flyer images from S3"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = ["s3:ListBucket"]
+        Resource = [aws_s3_bucket.website.arn]
+        Condition = {
+          StringLike = {
+            "s3:prefix" = ["events/*"]
+          }
+        }
+      },
+      {
+        Effect = "Allow"
+        Action = ["s3:GetObject"]
+        Resource = ["${aws_s3_bucket.website.arn}/events/*"]
+      }
+    ]
+  })
+
+  tags = local.common_tags
+}
+
+# Attach the S3 events policy to the Lambda role
+resource "aws_iam_role_policy_attachment" "lambda_s3_events_policy_attachment" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.lambda_s3_events_policy.arn
+}
+
+# CloudWatch Log Group for get-event-flyers Lambda
+resource "aws_cloudwatch_log_group" "get_event_flyers_logs" {
+  name              = "/aws/lambda/${var.project_name}-get-event-flyers-${var.environment}"
+  retention_in_days = 1
+  tags              = local.common_tags
+}

@@ -67,7 +67,7 @@ export default function Home() {
           marginTop: '2rem'
         }}>
           <img 
-            src="/mosaic.png" 
+            src="/images/mosaic.png" 
             alt="Mosaic" 
             style={{ 
               maxWidth: '600px', 
