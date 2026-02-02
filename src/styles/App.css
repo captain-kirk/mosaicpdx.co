@@ -366,6 +366,24 @@ footer.footer-custom {
   border: 2px solid white;
 }
 
+.events-rsvp-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+  padding: 10px 20px;
+  background-color: #0097b2;
+  color: white;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid white;
+}
+
+.events-rsvp-link:hover {
+  opacity: 0.8;
+  color: white;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   .header-custom {
