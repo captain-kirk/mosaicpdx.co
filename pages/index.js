@@ -75,6 +75,9 @@ export default function Home() {
               height: 'auto'
             }} 
           />
+          <>
+            <h1 className="movement-title">building community one piece at a time</h1>
+          </>
           <button className="movement-button" onClick={handleButtonClick}>
             Join the Movement
           </button>

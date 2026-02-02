@@ -40,3 +40,21 @@ Sign up for the email list
    ```
    ./infra/bin/deploy.sh <env> 
    ```
+
+
+## Admin
+
+### Events 
+Add events to the Events page by uploading a .png to events/upcoming in S3. 
+Update config.json with rsvpURL and rsvpLabel, where the label is what is displayed on the website. Here is the format:
+
+{
+  "birthday.png": {
+    "rsvpUrl": "https://forms.google.com/your-form-id",
+    "rsvpLabel": "RSVP"
+  },
+  "summer-kickoff.png": {
+    "rsvpUrl": "https://forms.google.com/another-form",
+    "rsvpLabel": "Register"
+  }
+}

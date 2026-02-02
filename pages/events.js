@@ -4,14 +4,6 @@ import { useState, useEffect } from 'react';
 // In development, uses mock data from public/. In production builds, fetches from S3 via API.
 const USE_MOCK = process.env.NODE_ENV === 'development';
 
-const MOCK_UPCOMING = [
-  { url: '/events/upcoming/birthday.png', key: 'events/upcoming/oasis.png', lastModified: '2026-03-15T00:00:00.000Z' },
-];
-
-const MOCK_PAST = [
-  { url: '/events/past/oasis.png', key: 'events/past/oasis.png', lastModified: '2026-03-15T00:00:00.000Z' },
-];
-
 export default function Events() {
   const [upcoming, setUpcoming] = useState([]);
   const [past, setPast] = useState([]);
@@ -21,8 +13,18 @@ export default function Events() {
   useEffect(() => {
     const fetchFlyers = async () => {
       if (USE_MOCK) {
-        setUpcoming(MOCK_UPCOMING);
-        setPast(MOCK_PAST);
+        try {
+          const response = await fetch('/events/config.json');
+          if (!response.ok) {
+            throw new Error('Failed to load config');
+          }
+          const config = await response.json();
+          setUpcoming(config.upcoming || []);
+          setPast(config.past || []);
+        } catch (err) {
+          console.error('Error loading config:', err);
+          setError('Unable to load event configuration.');
+        }
         setLoading(false);
         return;
       }
@@ -83,6 +85,16 @@ export default function Events() {
                         alt="Event flyer"
                         className="events-flyer-img"
                       />
+                      {flyer.rsvpUrl && (
+                        <a
+                          href={flyer.rsvpUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="events-rsvp-link"
+                        >
+                          {flyer.rsvpLabel || 'RSVP'}
+                        </a>
+                      )}
                     </div>
                   ))}
                 </div>
